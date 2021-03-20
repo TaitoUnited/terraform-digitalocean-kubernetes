@@ -23,6 +23,14 @@ variable "private_network_id" {
   type        = string
 }
 
+variable "registry_name" {
+  type        = string
+}
+
+variable "registry_subscription_tier_slug" {
+  type        = string
+}
+
 variable "kubernetes" {
   type = object({
     name = string

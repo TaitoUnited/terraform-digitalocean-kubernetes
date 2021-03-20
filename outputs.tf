@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
-output "details" {
-  value = digitalocean_kubernetes_cluster.kubernetes
+output "kubernetes_endpoint" {
+  value = digitalocean_kubernetes_cluster.kubernetes.endpoint
+}
+
+output "kubernetes_token" {
+  value = digitalocean_kubernetes_cluster.kubernetes.kube_config[0].token
 }
