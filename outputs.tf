@@ -15,9 +15,9 @@
  */
 
 output "kubernetes_endpoint" {
-  value = digitalocean_kubernetes_cluster.kubernetes.endpoint
+  value = digitalocean_kubernetes_cluster.kubernetes[0].endpoint
 }
 
 output "kubernetes_token" {
-  value = digitalocean_kubernetes_cluster.kubernetes.kube_config[0].token
+  value = digitalocean_kubernetes_cluster.kubernetes[0].kube_config[0].token
 }

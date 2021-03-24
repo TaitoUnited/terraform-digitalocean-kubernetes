@@ -15,7 +15,6 @@
  */
 
 data "digitalocean_kubernetes_versions" "kubernetes" {
-  count          = local.kubernetes.name != "" ? 1 : 0
   version_prefix = local.kubernetes.version
 }
 
@@ -31,9 +30,12 @@ resource "digitalocean_kubernetes_cluster" "kubernetes" {
   vpc_uuid       = var.private_network_id
 
   node_pool {
-    name       = "default"
-    size       = "s-2vcpu-2gb"
-    node_count = 0
+    name       = local.kubernetes.nodePools[0].name
+    size       = local.kubernetes.nodePools[0].size
+    auto_scale = local.kubernetes.nodePools[0].minNodeCount != local.kubernetes.nodePools[0].maxNodeCount
+    node_count = local.kubernetes.nodePools[0].minNodeCount == local.kubernetes.nodePools[0].maxNodeCount ? local.kubernetes.nodePools[0].minNodeCount : null
+    min_nodes  = local.kubernetes.nodePools[0].minNodeCount != local.kubernetes.nodePools[0].maxNodeCount ? local.kubernetes.nodePools[0].minNodeCount : null
+    max_nodes  = local.kubernetes.nodePools[0].maxNodeCount != local.kubernetes.nodePools[0].maxNodeCount ? local.kubernetes.nodePools[0].maxNodeCount : null
   }
 
   lifecycle {
@@ -42,7 +44,7 @@ resource "digitalocean_kubernetes_cluster" "kubernetes" {
 }
 
 resource "digitalocean_kubernetes_node_pool" "bar" {
-  for_each   = {for item in local.storageBuckets: item.name => item}
+  for_each   = {for item in slice(local.kubernetes.nodePools, 1, length(local.kubernetes.nodePools)): item.name => item}
 
   cluster_id = digitalocean_kubernetes_cluster.kubernetes[0].id
 

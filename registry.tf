@@ -24,10 +24,10 @@ resource "digitalocean_container_registry_docker_credentials" "registry" {
 }
 
 provider "kubernetes" {
-  host             = digitalocean_kubernetes_cluster.kubernetes.endpoint
-  token            = digitalocean_kubernetes_cluster.kubernetes.kube_config[0].token
+  host             = digitalocean_kubernetes_cluster.kubernetes[0].endpoint
+  token            = digitalocean_kubernetes_cluster.kubernetes[0].kube_config[0].token
   cluster_ca_certificate = base64decode(
-    data.digitalocean_kubernetes_cluster.example.kube_config[0].cluster_ca_certificate
+    digitalocean_kubernetes_cluster.kubernetes[0].kube_config[0].cluster_ca_certificate
   )
 }
 
