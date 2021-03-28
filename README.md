@@ -140,6 +140,7 @@ Combine with the following modules to get a complete infrastructure defined by Y
 
 - [DNS](https://registry.terraform.io/modules/TaitoUnited/dns/digitalocean)
 - [Network](https://registry.terraform.io/modules/TaitoUnited/network/digitalocean)
+- [Compute](https://registry.terraform.io/modules/TaitoUnited/compute/digitalocean)
 - [Kubernetes](https://registry.terraform.io/modules/TaitoUnited/kubernetes/digitalocean)
 - [Databases](https://registry.terraform.io/modules/TaitoUnited/databases/digitalocean)
 - [Storage](https://registry.terraform.io/modules/TaitoUnited/storage/digitalocean)
