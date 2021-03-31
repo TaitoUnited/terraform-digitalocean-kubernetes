@@ -44,24 +44,40 @@ Example YAML:
 ```
 # Permissions
 permissions:
+
+  # Cluster-wide permissions
   clusterRoles:
     - name: taito-iam-admin
-      subjects: [ "group:devops@mydomain.com" ]
+      subjects: [ "ADMINS_GROUP_ID" ]
     - name: taito-status-viewer
-      subjects: [ "group:staff@mydomain.com" ]
+      subjects: [ "DEVELOPERS_GROUP_ID" ]
+
+  # Namespace specific permissions
   namespaces:
+    - name: common
+      clusterRoles:
+        - name: taito-secret-viewer
+          subjects:
+            - DEVELOPERS_GROUP_ID
+            - CICD_TESTER_USER_ID
     - name: db-proxy
       clusterRoles:
         - name: taito-pod-portforwarder
-          subjects: [ "user:jane.external@anotherdomain.com" ]
+          subjects:
+            - DEVELOPERS_GROUP_ID
+            - CICD_TESTER_USER_ID
     - name: my-namespace
       clusterRoles:
-        - name: taito-status-viewer
-          subjects: [ "user:jane.external@anotherdomain.com" ]
+        - name: taito-developer
+          subjects:
+            - SOME_USER_ID
+            - ANOTHER_USER_ID
     - name: another-namespace
       clusterRoles:
         - name: taito-developer
-          subjects: [ "user:jane.external@anotherdomain.com" ]
+          subjects:
+            - SOME_USER_ID
+            - ANOTHER_USER_ID            
 
 kubernetes:
   name: zone1-common-kube1
