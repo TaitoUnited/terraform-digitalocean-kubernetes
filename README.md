@@ -151,6 +151,7 @@ YAML attributes:
 
 - See variables.tf for all the supported YAML attributes.
 - See [kubernetes_cluster](https://registry.terraform.io/providers/digitalocean/digitalocean/latest/docs/resources/kubernetes_cluster) for attribute descriptions.
+- See [Cluster Roles](https://github.com/TaitoUnited/taito-charts/blob/master/kubernetes-admin/templates/clusterrole.yaml) of kubernetes-admin Helm Chart for all predefined role definitions (e.g. taito-developer, taito-status-viewer, taito-secret-viewer).
 
 Combine with the following modules to get a complete infrastructure defined by YAML:
 
