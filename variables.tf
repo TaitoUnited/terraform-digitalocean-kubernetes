@@ -114,19 +114,19 @@ variable "mysql_cluster_names" {
 # TODO: Should be optional and null by default
 variable "ingress_nginx_version" {
   type        = string
-  default     = "3.24.0"
+  default     = "4.0.6"
 }
 
 # NOTE: Remember to update also helm_apps.tf
 # TODO: Should be optional and null by default
 variable "cert_manager_version" {
   type        = string
-  default     = "1.2.0"
+  default     = "1.5.4"
 }
 
 variable "kubernetes_admin_version" {
   type        = string
-  default     = "1.8.0"
+  default     = "1.10.0"
 }
 
 variable "socat_tunneler_version" {
